@@ -1,0 +1,551 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>DOVA Training · Cybersecurity Fundamentals</title><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet"/><style>*,*::before,*::after{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:#060f1f;color:#E6EDF5;
+  font-family:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  line-height:1.5;min-height:100vh;
+  background-image:radial-gradient(circle at 85% 8%,rgba(21,128,61,0.16),transparent 40%),
+    radial-gradient(circle at 15% 92%,rgba(21,128,61,0.10),transparent 40%);
+}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;padding:0;}
+input,textarea,select{font-family:inherit;}
+p{margin:0;}h1,h2,h3,h4{margin:0;font-weight:normal;}
+.container{max-width:960px;margin:0 auto;padding:0 20px;}
+
+header.site{border-bottom:2px solid #16314f;background:rgba(0,0,0,.85);
+  position:sticky;top:0;z-index:10;backdrop-filter:blur(8px);}
+.header-row{max-width:960px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:12px;}
+.logo-tile{width:40px;height:40px;background:#15803d;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.header-meta .small{font-family:'Roboto Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.3em;color:#4a6076;}
+.header-meta .big{font-family:'Inter',sans-serif;font-size:18px;color:#fff;margin-top:2px;}
+footer.site{max-width:960px;margin:0 auto;padding:28px 20px;border-top:1px solid #16314f;text-align:center;}
+footer.site p{font-family:'Roboto Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.3em;color:#1e3a5f;}
+
+.lab-hero{position:relative;border:2px solid #1e3a5f;background:#0B1F3D;overflow:hidden;margin-bottom:28px;}
+.hero-grid{position:absolute;inset:0;opacity:.1;
+  background-image:linear-gradient(rgba(21,128,61,.3) 1px,transparent 1px),linear-gradient(90deg,rgba(21,128,61,.3) 1px,transparent 1px);
+  background-size:24px 24px;}
+.hero-glow{position:absolute;top:-40px;right:-40px;width:220px;height:220px;
+  background:#15803d;border-radius:50%;filter:blur(80px);opacity:.30;}
+.lab-hero-inner{position:relative;padding:28px 24px;}
+.lab-eyebrow{font-family:'Roboto Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.3em;color:#7fd1a3;margin-bottom:8px;}
+.lab-h1{font-family:'Inter',sans-serif;font-size:clamp(40px,9vw,68px);color:#fff;line-height:.9;margin-bottom:14px;}
+.lab-h1 .accent{color:#7fd1a3;}
+.lab-blurb{color:#9FB3C8;max-width:560px;font-size:14px;line-height:1.7;margin-bottom:22px;}
+.lab-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:460px;}
+.lab-stat{border:1px solid #1e3a5f;background:rgba(0,0,0,.4);padding:8px 10px;}
+.lab-stat-num{font-family:'Inter',sans-serif;font-size:24px;color:#7fd1a3;margin:0;}
+.lab-stat-lbl{font-family:'Roboto Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#4a6076;margin:0;}
+
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;}
+.cat-card{text-align:left;background:#0B1F3D;border:2px solid #1e3a5f;padding:0;overflow:hidden;width:100%;}
+.cat-card.is-done{border-color:#2A8C5A;}
+.cat-stripe{height:6px;}
+.cat-inner{padding:18px;}
+.cat-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;}
+.cat-icon-tile{width:44px;height:44px;color:#fff;display:flex;align-items:center;justify-content:center;}
+.cat-card h3{font-family:'Inter',sans-serif;font-size:22px;color:#fff;margin:0 0 6px;line-height:1.05;}
+.cat-card-blurb{font-size:12px;color:#9FB3C8;margin:0 0 14px;line-height:1.5;}
+.cat-card-foot{display:flex;justify-content:space-between;align-items:center;
+  font-family:'Roboto Mono',monospace;font-size:9px;color:#6b8099;text-transform:uppercase;letter-spacing:.2em;}
+.cat-progress-track{height:4px;background:#16314f;flex:1;margin-left:12px;max-width:80px;}
+.cat-progress-fill{height:100%;background:#2A8C5A;}
+
+.cat-back-btn{font-family:'Roboto Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.2em;
+  color:#6b8099;display:flex;align-items:center;gap:6px;margin-bottom:20px;}
+.cat-header{background:#0B1F3D;border:2px solid #1e3a5f;padding:20px;margin-bottom:16px;}
+.cat-header-inner{display:flex;gap:16px;align-items:flex-start;}
+.cat-header-icon{width:56px;height:56px;color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.cat-header-eyebrow{font-family:'Roboto Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.3em;margin:0;}
+.cat-header-title{font-family:'Inter',sans-serif;font-size:32px;color:#fff;margin:4px 0;line-height:1;}
+.cat-header-blurb{color:#9FB3C8;font-size:13px;margin:0;line-height:1.5;}
+
+.lesson-list{display:flex;flex-direction:column;gap:8px;}
+.lesson-row{display:flex;align-items:center;gap:12px;padding:14px 16px;background:#0B1F3D;
+  border:2px solid #1e3a5f;width:100%;text-align:left;}
+.lesson-row.is-done{border-color:#2A8C5A;}
+.lesson-row.is-locked{opacity:.45;cursor:not-allowed;}
+.lesson-row:not(.is-locked){cursor:pointer;}
+.lesson-num-tile{width:30px;height:30px;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  font-family:'Inter',sans-serif;font-size:16px;}
+.lesson-num-tile.done   {background:#2A8C5A;color:#060f1f;}
+.lesson-num-tile.current{background:#7fd1a3;color:#060f1f;}
+.lesson-num-tile.pending{background:#16314f;color:#6b8099;}
+.lesson-row-meta{flex:1;min-width:0;}
+.lesson-row-title{font-family:'Inter',sans-serif;font-size:18px;color:#fff;margin:0;line-height:1.1;}
+.lesson-row-tag{font-family:'Roboto Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;margin:4px 0 0;}
+
+.lesson-card{border:2px solid #1e3a5f;background:#0B1F3D;}
+.lesson-card-header{color:#fff;padding:16px 20px;display:flex;align-items:center;gap:16px;border-bottom:2px solid #1e3a5f;}
+.lesson-icon-tile{width:52px;height:52px;background:rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.lesson-card-eyebrow{font-family:'Roboto Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.25em;font-weight:700;opacity:.85;margin:0;}
+.lesson-card-title{font-family:'Inter',sans-serif;font-size:32px;margin:4px 0 0;line-height:1;color:#fff;}
+.lesson-card-body{padding:24px 22px;}
+.lesson-section{margin-bottom:22px;}
+.lesson-section h3{font-family:'Inter',sans-serif;font-size:22px;color:#7fd1a3;margin:0 0 8px;}
+.lesson-section p{color:#9FB3C8;line-height:1.65;margin:0;font-size:14px;}
+.tip-box{background:rgba(21,128,61,.14);border-left:4px solid #15803d;padding:12px 16px;margin-top:20px;}
+.tip-eyebrow{font-family:'Roboto Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.25em;color:#7fd1a3;margin:0 0 6px;font-weight:700;}
+.tip-body{color:#bfdbfe;font-size:13px;margin:0;line-height:1.55;font-style:italic;}
+
+.complete-btn{width:100%;margin-top:24px;padding:14px 0;
+  font-family:'Inter',sans-serif;font-size:18px;letter-spacing:.2em;
+  background:#15803d;color:#fff;border:2px solid #15803d;
+  display:flex;align-items:center;justify-content:center;gap:10px;}
+
+.pile-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:6px;}
+@media (max-width:600px){ .pile-grid{grid-template-columns:1fr 1fr;} }
+.pile-tile{background:#0a1830;border:1px solid #1e3a5f;border-top:3px solid #15803d;padding:10px 10px;}
+.pile-name{font-family:'Inter',sans-serif;font-size:18px;color:#7fd1a3;margin:0 0 4px;line-height:1;}
+.pile-body{font-size:11px;color:#9FB3C8;line-height:1.45;margin:0;}
+
+.int-card{border:2px solid #1e3a5f;background:#0B1F3D;}
+.int-card-header{color:#fff;padding:16px 20px;display:flex;align-items:center;gap:16px;border-bottom:2px solid #1e3a5f;}
+.int-card-body{padding:24px 22px;}
+
+.mib-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media (max-width:720px){ .mib-grid{grid-template-columns:1fr;} }
+.mib-col h4{font-family:'Roboto Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.25em;color:#7fd1a3;margin:0 0 12px;}
+.mib-field{margin-bottom:12px;}
+.mib-label{font-family:'Roboto Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#6b8099;margin-bottom:4px;display:block;}
+.mib-input,.mib-textarea,.mib-select{
+  width:100%;background:#0a1830;border:1px solid #1e3a5f;color:#E6EDF5;
+  padding:8px 10px;font-size:13px;outline:none;font-family:inherit;
+}
+.mib-input:focus,.mib-textarea:focus,.mib-select:focus{border-color:#15803d;}
+.mib-textarea{resize:vertical;min-height:60px;line-height:1.5;font-size:12px;}
+
+.invite-preview{background:#0a1830;border:1px solid #1e3a5f;padding:0;overflow:hidden;}
+.invite-preview-head{background:#15803d;color:#fff;padding:10px 14px;}
+.invite-preview-head h5{font-family:'Inter',sans-serif;font-size:20px;margin:0;line-height:1.1;}
+.invite-preview-head p{font-family:'Roboto Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;opacity:.85;margin:2px 0 0;}
+.invite-preview-body{padding:12px 14px;}
+.invite-row{display:flex;gap:10px;font-size:12px;color:#9FB3C8;padding:5px 0;border-bottom:1px dashed #16314f;}
+.invite-row:last-child{border-bottom:none;}
+.invite-row-key{font-family:'Roboto Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.15em;color:#6b8099;width:80px;flex-shrink:0;padding-top:1px;}
+.invite-row-val{flex:1;color:#E6EDF5;line-height:1.5;white-space:pre-line;}
+.invite-empty{color:#4a6076;font-style:italic;}
+
+.mib-check-btn{margin-top:16px;padding:10px 18px;font-family:'Inter',sans-serif;font-size:14px;letter-spacing:.2em;
+  background:#15803d;color:#fff;border:2px solid #15803d;}
+.mib-feedback{margin-top:14px;padding:12px 14px;font-size:12px;line-height:1.6;}
+.mib-feedback.ok{background:rgba(16,185,129,.08);border:1px solid #2A8C5A;color:#a7f3d0;}
+.mib-feedback.bad{background:rgba(239,68,68,.08);border:1px solid #ef4444;color:#fca5a5;}
+.mib-feedback.warn{background:rgba(250,204,21,.08);border:1px solid #2E6FDB;color:#fde68a;}
+.mib-feedback ul{margin:6px 0 0;padding-left:18px;}
+.mib-feedback li{margin-bottom:3px;}
+
+.drill-stage{background:#0a1830;border:1px solid #1e3a5f;padding:18px;margin-bottom:14px;}
+.drill-tag{font-family:'Roboto Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#7fd1a3;margin-bottom:8px;}
+.drill-scenario{background:#1c1917;border-left:3px solid #15803d;padding:12px 14px;margin-bottom:14px;}
+.drill-from{font-family:'Roboto Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.15em;color:#7fd1a3;margin-bottom:4px;}
+.drill-subject{font-size:13px;color:#E6EDF5;font-weight:600;margin-bottom:4px;}
+.drill-body{font-size:12px;color:#9FB3C8;line-height:1.5;}
+.drill-btns{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:6px;}
+.drill-btn{padding:12px 8px;background:#09090b;border:1px solid #1e3a5f;font-family:'Inter',sans-serif;font-size:13px;letter-spacing:.05em;color:#9FB3C8;line-height:1.2;display:flex;flex-direction:column;align-items:center;gap:4px;}
+.drill-btn:hover{border-color:#7fd1a3;}
+.drill-btn small{font-family:'Roboto Mono',monospace;font-size:8px;text-transform:uppercase;letter-spacing:.15em;color:#4a6076;}
+.drill-btn.picked-correct{background:rgba(16,185,129,.15);border-color:#2A8C5A;color:#a7f3d0;}
+.drill-btn.picked-correct small{color:#6ee7b7;}
+.drill-btn.picked-wrong{background:rgba(239,68,68,.1);border-color:#ef4444;color:#fca5a5;}
+.drill-btn.correct-shown{background:rgba(16,185,129,.08);border-color:#2A8C5A;color:#a7f3d0;}
+.drill-btn.correct-shown small{color:#6ee7b7;}
+.feedback{margin-top:14px;padding:10px 14px;font-size:12px;line-height:1.55;}
+.feedback.ok{background:rgba(16,185,129,.08);border:1px solid #2A8C5A;color:#a7f3d0;}
+.feedback.bad{background:rgba(239,68,68,.08);border:1px solid #ef4444;color:#fca5a5;}
+
+.sim-buttons{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:6px;}
+.sim-btn{padding:12px 8px;background:#09090b;border:1px solid #1e3a5f;
+  font-family:'Inter',sans-serif;font-size:13px;letter-spacing:.05em;color:#9FB3C8;line-height:1.2;}
+.sim-btn:hover{border-color:#7fd1a3;}
+.sim-btn.picked-correct{background:rgba(16,185,129,.15);border-color:#2A8C5A;color:#a7f3d0;}
+.sim-btn.picked-wrong{background:rgba(239,68,68,.1);border-color:#ef4444;color:#fca5a5;}
+.sim-btn.correct-shown{background:rgba(16,185,129,.08);border-color:#2A8C5A;color:#a7f3d0;}
+
+.next-btn{padding:10px 18px;font-family:'Inter',sans-serif;font-size:14px;letter-spacing:.2em;
+  background:#15803d;color:#fff;border:2px solid #15803d;}
+.score-line{font-family:'Roboto Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.15em;
+  color:#9FB3C8;margin-top:16px;padding-top:14px;border-top:1px solid #16314f;}
+
+.compose{background:#0a1830;border:1px solid #1e3a5f;overflow:hidden;}
+.compose-bar{background:#15803d;color:#fff;padding:8px 12px;font-family:'Roboto Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;}
+.compose-row{display:flex;gap:8px;padding:7px 12px;border-bottom:1px solid #16314f;font-size:12px;}
+.compose-key{font-family:'Roboto Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.15em;color:#6b8099;width:54px;flex-shrink:0;padding-top:2px;}
+.compose-val{flex:1;color:#E6EDF5;line-height:1.4;}
+.compose-body{padding:12px;font-size:12px;color:#E6EDF5;line-height:1.6;white-space:pre-line;min-height:84px;}
+.compose-sig{padding:10px 12px 12px;border-top:1px dashed #16314f;font-size:11px;color:#9FB3C8;line-height:1.5;}
+.compose-empty{color:#4a6076;font-style:italic;}
+.sigcard{background:#0a1830;border:1px solid #1e3a5f;border-left:3px solid #15803d;padding:12px 14px;margin-top:6px;font-size:12px;color:#E6EDF5;line-height:1.6;}
+.sigcard b{color:#7fd1a3;}
+.annot{background:#0a1830;border:1px solid #1e3a5f;padding:0;margin-top:6px;overflow:hidden;}
+.annot-row{display:flex;gap:10px;padding:9px 12px;border-bottom:1px solid #16314f;}
+.annot-row:last-child{border-bottom:none;}
+.annot-tag{font-family:'Roboto Mono',monospace;font-size:8px;text-transform:uppercase;letter-spacing:.15em;color:#7fd1a3;width:64px;flex-shrink:0;padding-top:2px;}
+.annot-txt{flex:1;font-size:12px;color:#E6EDF5;line-height:1.5;}
+.mini-tbl{width:100%;border-collapse:collapse;margin-top:6px;font-size:11px;}
+.mini-tbl th{font-family:'Roboto Mono',monospace;font-size:8px;text-transform:uppercase;letter-spacing:.12em;color:#7fd1a3;text-align:left;padding:6px 8px;border-bottom:1px solid #1e3a5f;background:#0a1830;}
+.mini-tbl td{padding:6px 8px;border-bottom:1px solid #16314f;color:#E6EDF5;}
+.split2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px;}
+@media(max-width:600px){.split2{grid-template-columns:1fr;}}
+.split2 .col{background:#0a1830;border:1px solid #1e3a5f;padding:10px 12px;}
+.split2 .col h5{font-family:'Inter',sans-serif;font-size:16px;margin:0 0 6px;color:#7fd1a3;}
+.split2 .col p{font-size:11px;color:#9FB3C8;line-height:1.5;margin:0;}
+.week-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:6px;}
+@media(max-width:600px){.week-grid{grid-template-columns:1fr 1fr;}}
+.week-day{background:#0a1830;border:1px solid #1e3a5f;padding:10px 8px;}
+.week-day-name{font-family:'Inter',sans-serif;font-size:16px;color:#7fd1a3;margin:0 0 6px;}
+.week-day-tag{font-family:'Roboto Mono',monospace;font-size:8px;text-transform:uppercase;letter-spacing:.15em;color:#6b8099;margin:0 0 6px;}
+.week-day-body{font-size:11px;color:#9FB3C8;line-height:1.4;margin:0;}
+</style></head><body><header class="site"><div class="header-row"><div class="logo-tile" id="logo-slot"></div><div class="header-meta"><p class="small">DOVA Training · Module 08</p><p class="big">DOVA · Cybersecurity Fundamentals</p></div><a href="suite.html" class="home-link">All modules</a></div><style>.home-link{margin-left:auto;font-family:'Roboto Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:#9FB3C8;border:1px solid #1e3a5f;padding:7px 12px;border-radius:3px;}.home-link:hover{border-color:#2E6FDB;color:#2E6FDB;}</style></header><main class="container" style="padding:28px 20px 48px;"><div id="app"></div></main><footer class="site"><p>D.O.V.A., LLC · Virtual Office · Internal Use Only · Confidential</p></footer><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="config.js"></script><script>"use strict";
+const ICONS={
+  'arrow-right':'<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
+  'arrow-left':'<path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>',
+  'check':'<path d="M20 6 9 17l-5-5"/>',
+  'lock':'<rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
+  'shield':'<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>',
+  'shield-check':'<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/>',
+  'mail':'<rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>',
+  'inbox':'<path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/>',
+  'monitor':'<rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/>',
+  'users':'<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+  'message-square':'<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>',
+  'calendar':'<rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/>',
+  'file-text':'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><line x1="10" x2="8" y1="9" y2="9"/>',
+  'cpu':'<rect width="16" height="16" x="4" y="4" rx="2"/><rect width="6" height="6" x="9" y="9"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/>',
+  'car':'<path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/>',
+  'key':'<circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6"/><path d="m15.5 7.5 3 3L22 7l-3-3"/>',
+  'alert-triangle':'<path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/>',
+  'folder':'<path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/>',
+  'cloud':'<path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/>',
+  'bot':'<path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/>',
+  'compass':'<circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>',
+  'briefcase':'<rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>',
+  'phone':'<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92Z"/>',
+  'eye':'<path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/>',
+  'globe':'<circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/>',
+  'book':'<path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/>',
+  'wrench':'<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>',
+  'lock-keyhole':'<circle cx="12" cy="16" r="1"/><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>'
+};
+function icon(name,size,color){size=size||16;color=color||'currentColor';var p=ICONS[name]||'';return '<svg width="'+size+'" height="'+size+'" viewBox="0 0 24 24" fill="none" stroke="'+color+'" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">'+p+'</svg>';}
+const MODULE_ID="m08-cybersecurity";
+const LOGO_ICON="shield-check";
+const CATEGORIES=[{"id": "phish", "iconKey": "mail", "color": "#1f4e9c", "title": "Phishing And Scams", "blurb": "Spotting the fake email or message before you click, and what to do when one lands.", "lessons": [{"id": "s-1", "title": "How Phishing Works", "type": "reading", "minutes": 4}, {"id": "s-2", "title": "The Tells", "type": "reading", "minutes": 4}, {"id": "s-3", "title": "When One Lands", "type": "reading", "minutes": 4}]}, {"id": "pass", "iconKey": "key", "color": "#2E6FDB", "title": "Passwords And Sign-In", "blurb": "Strong unique passwords, a manager, and why MFA is non-negotiable.", "lessons": [{"id": "s-4", "title": "Strong, Unique, Managed", "type": "reading", "minutes": 4}, {"id": "s-5", "title": "Multi-Factor Sign-In", "type": "reading", "minutes": 4}]}, {"id": "device", "iconKey": "monitor", "color": "#3a5a86", "title": "Devices And Networks", "blurb": "Locking up, public wifi, and keeping the machine clean.", "lessons": [{"id": "s-6", "title": "Locking And Updating", "type": "reading", "minutes": 4}, {"id": "s-7", "title": "Public Wifi And Links", "type": "reading", "minutes": 4}]}, {"id": "drill", "iconKey": "shield", "color": "#0ea5b7", "title": "Threat Drill", "blurb": "Put it together. Spot the threat and pick the response.", "lessons": [{"id": "s-8", "title": "Spot The Threat", "type": "interactive", "minutes": 8, "intKey": "threatDrill"}]}];
+const LESSON_CONTENT={"s-1": {"sections": [{"h": "The most common way in", "b": "Phishing is a fake message that tries to get you to click a bad link, open a bad file, or hand over a password. It is the most common way attackers get into a company. It works by looking real and creating a rush."}, {"h": "It targets people, not machines", "b": "Phishing does not break the software. It tricks the person. That is why it is your job, not just IT's. A careful reader stops most attacks before they start. You are the filter."}], "tip": "Most breaches start with a person clicking, not a machine being hacked. That makes you the front line. A careful second look stops most of it."}, "s-2": {"sections": [{"h": "Urgency and odd senders", "b": "The tells are a sense of rush, a sender address that is slightly off, a link that does not match the text, spelling that is wrong, and a request you did not expect. Any one of these is a reason to slow down."}, {"h": "Check the link before you click", "b": "Hover over a link to see where it really goes before clicking. The visible text can say one thing and the real address another. If the address looks wrong or unfamiliar, do not click. Verify another way."}], "tip": "Urgency is the number one tell. Real work rarely needs you to click right now or else. When a message rushes you, slow down and check."}, "s-3": {"sections": [{"h": "Do not click, do report", "b": "If you think a message is phishing, do not click anything in it and do not reply. Report it to Joseph so it can be checked and others warned. Reporting a real one protects the whole team."}, {"h": "If you already clicked", "b": "If you clicked or entered a password before you realized, tell Joseph right away. Speed matters. Owning it fast lets us change the password and limit the damage. Hiding it makes it worse."}], "tip": "If you clicked something you should not have, tell Joseph immediately. There is no shame in it and speed limits the damage. Hiding it is the only real mistake."}, "s-4": {"sections": [{"h": "Long, unique, not reused", "b": "A strong password is long and unique to that account. The biggest risk is reuse. One reused password leaked from one site lets an attacker into everything else you used it on. Every account gets its own."}, {"h": "Use the password manager", "b": "You cannot remember a unique strong password for every account, so use the approved password manager. It generates and stores them, and you remember one strong master password. That is how this is done safely."}], "tip": "Never reuse a password across accounts. One leak then opens all of them. Let the password manager generate and remember unique ones for you."}, "s-5": {"sections": [{"h": "A second factor stops stolen passwords", "b": "Multi-factor sign-in asks for a second proof, usually a code or a tap on your phone, on top of the password. Even if someone steals your password, they cannot get in without the second factor. Turn it on everywhere it is offered."}, {"h": "Approve only what you started", "b": "Only approve a sign-in prompt you just triggered yourself. If a code or approval request shows up that you did not start, do not approve it, and tell Joseph. That prompt may mean someone has your password."}], "tip": "Turn on multi-factor everywhere. And never approve a sign-in request you did not just start yourself. An unexpected prompt is a warning, not a thing to tap away."}, "s-6": {"sections": [{"h": "Lock and update", "b": "Lock your screen whenever you step away, with Windows plus L. Let updates install. These two habits, done without thinking, close the easy doors. Most everyday risk is handled by locking and staying current."}, {"h": "Keep the machine clean", "b": "Install only software you need and trust, through approved means. Random downloads and browser add-ons are a common way trouble gets on a machine. If you are not sure a program is safe, ask before installing."}], "tip": "Lock when you leave and let updates run. Those two habits alone close most of the easy ways in. Do not install software you are unsure about. Ask first."}, "s-7": {"sections": [{"h": "Public wifi is not private", "b": "On public wifi, others may see more than you think. Avoid sensitive work on open networks. If you must work on the road, use your phone's hotspot or wait for a trusted connection. Treat public wifi as a public room."}, {"h": "Links and files from anyone", "b": "A link or file is only as safe as where it came from, and senders can be faked. Do not open attachments or click links you did not expect, even from a familiar name, until you are sure. When unsure, confirm through another channel."}], "tip": "Treat public wifi like a crowded room. Save sensitive work for a trusted network. And confirm an unexpected attachment with the sender another way before opening it."}};
+const WIDGETS={"threatDrill": {"family": "quiz", "btn": "sim", "icon": "shield-check", "prefix": "td", "unit": "Alert", "intro": "Eight things hit your screen. For each, pick the response. Most threats want one of two things from you, a click or a password, and they create a rush to get it. Slow down and pick the safe move.", "actions": ["Safe, proceed", "Slow down and verify", "Report to Joseph"], "scenarios": [{"id": "x1", "fromLabel": "Alert", "from": "Email", "body": "An urgent email says your password expires in one hour, click here to keep your account, from an address that is almost but not quite the real one.", "correct": "Report to Joseph", "why": "Urgency, a fake-looking sender, and a password grab. Textbook phishing. Do not click. Report it so others get warned."}, {"id": "x2", "fromLabel": "Alert", "from": "Sign-in", "body": "A multi-factor approval prompt pops up on your phone, but you are not signing in to anything right now.", "correct": "Report to Joseph", "why": "A prompt you did not start can mean someone has your password and is trying to get in. Do not approve. Report it now."}, {"id": "x3", "fromLabel": "Alert", "from": "Expected", "body": "You just logged in to a work app and it asks for your multi-factor code.", "correct": "Safe, proceed", "why": "You started this sign-in, so the prompt is expected. Enter the code. This is multi-factor working as intended."}, {"id": "x4", "fromLabel": "Alert", "from": "Attachment", "body": "A familiar name sends an invoice attachment you were not expecting, with a vague one-line message.", "correct": "Slow down and verify", "why": "Unexpected attachment, even from a known name, since senders can be faked. Confirm with them another way before opening. Do not just click."}, {"id": "x5", "fromLabel": "Alert", "from": "Link", "body": "A message says you won a prize, click to claim, from a sender you do not know.", "correct": "Report to Joseph", "why": "Unknown sender, too-good offer, click to claim. A scam. Do not click. Report it and move on."}, {"id": "x6", "fromLabel": "Alert", "from": "Routine", "body": "Windows tells you updates are ready and asks to restart tonight.", "correct": "Safe, proceed", "why": "A normal update prompt from the system. Let it run. Staying current is part of staying safe."}, {"id": "x7", "fromLabel": "Alert", "from": "Caller", "body": "Someone calls saying they are IT support and need your password to fix an issue.", "correct": "Report to Joseph", "why": "Real IT never needs your password, and pressure on a call is a classic trick. Do not give it. Hang up and report the call."}, {"id": "x8", "fromLabel": "Alert", "from": "Wifi", "body": "At a cafe, a free open network has a slightly odd name and asks you to sign in with your email and password.", "correct": "Slow down and verify", "why": "An odd network asking for your credentials is a trap. Do not enter them. Use your phone hotspot, and if in doubt, report it."}]}};
+const MOD_EYEBROW="DOVA Training \u00b7 Module 08";
+const MOD_H1="Cybersecurity <span class=\"accent\">Fundamentals</span>";
+const MOD_BLURB="The everyday security habits that keep DOVA safe. Phishing, passwords, devices, and data.";
+var state={view:'home',completed:{}};
+function esc(s){ if(s==null)return''; return String(s).replace(/[&<>"']/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];}); }
+function getCat(id){ for(var i=0;i<CATEGORIES.length;i++) if(CATEGORIES[i].id===id) return CATEGORIES[i]; return null; }
+function getLesson(id){
+  for(var i=0;i<CATEGORIES.length;i++){
+    var c=CATEGORIES[i];
+    for(var j=0;j<c.lessons.length;j++) if(c.lessons[j].id===id) return{lesson:c.lessons[j],cat:c,idx:j};
+  }return null;
+}
+function totalLessons(){ return CATEGORIES.reduce(function(a,c){return a+c.lessons.length;},0); }
+function completedCount(){ return Object.keys(state.completed).length; }
+
+
+function renderHome(){
+  var done=completedCount();var html='';
+  html+='<div class="lab-hero"><div class="hero-grid"></div><div class="hero-glow"></div>';
+  html+='<div class="lab-hero-inner">';
+  html+='<p class="lab-eyebrow">'+esc(MOD_EYEBROW)+'</p>';
+  html+='<h1 class="lab-h1">'+MOD_H1+'</h1>';
+  html+='<p class="lab-blurb">'+esc(MOD_BLURB)+'</p>';
+  html+='<div class="lab-stats">';
+  [[String(CATEGORIES.length),'Categories'],[String(totalLessons()),'Lessons'],[String(done),'Done']].forEach(function(s){
+    html+='<div class="lab-stat"><p class="lab-stat-num">'+s[0]+'</p><p class="lab-stat-lbl">'+s[1]+'</p></div>';
+  });
+  html+='</div></div></div>';
+  html+='<div class="cat-grid">';
+  CATEGORIES.forEach(function(cat){
+    var doneN=cat.lessons.filter(function(l){return state.completed[l.id];}).length;
+    var tot=cat.lessons.length;var allDone=doneN===tot;var pct=tot?(doneN/tot)*100:0;
+    html+='<button class="cat-card'+(allDone?' is-done':'')+'" data-action="open-cat" data-cat-id="'+cat.id+'">';
+    html+='<div class="cat-stripe" style="background:'+cat.color+';"></div>';
+    html+='<div class="cat-inner"><div class="cat-top">';
+    html+='<div class="cat-icon-tile" style="background:'+cat.color+';">'+icon(cat.iconKey,24,'#fff')+'</div>';
+    if(allDone) html+='<div class="cat-icon-tile" style="background:#10b981;width:28px;height:28px;">'+icon('check',16,'#000')+'</div>';
+    html+='</div>';
+    html+='<h3>'+esc(cat.title)+'</h3>';
+    html+='<p class="cat-card-blurb">'+esc(cat.blurb)+'</p>';
+    html+='<div class="cat-card-foot"><span>'+doneN+'/'+tot+' done</span><span class="cat-progress-track"><span class="cat-progress-fill" style="width:'+pct+'%;"></span></span></div>';
+    html+='</div></button>';
+  });
+  html+='</div>';return html;
+}
+
+function renderCategory(cat){
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-home">'+icon('arrow-left',13)+' Back to module home</button>';
+  html+='<div class="cat-header"><div class="cat-header-inner">';
+  html+='<div class="cat-header-icon" style="background:'+cat.color+';">'+icon(cat.iconKey,28,'#fff')+'</div>';
+  html+='<div><p class="cat-header-eyebrow" style="color:'+cat.color+';">Category</p>';
+  html+='<h2 class="cat-header-title">'+esc(cat.title)+'</h2>';
+  html+='<p class="cat-header-blurb">'+esc(cat.blurb)+'</p>';
+  html+='</div></div></div>';
+  html+='<div class="lesson-list">';
+  cat.lessons.forEach(function(l,i){
+    var isDone=!!state.completed[l.id];
+    var prevDone=i===0||!!state.completed[cat.lessons[i-1].id];
+    var locked=!isDone&&!prevDone;
+    var current=!isDone&&prevDone;
+    var tileCls=isDone?'done':current?'current':'pending';
+    var typeLabel=l.type==='reading'?'Reading':'Interactive';
+    var typeColor=l.type==='reading'?'#71717a':'#86efac';
+    html+='<button class="lesson-row'+(isDone?' is-done':'')+(locked?' is-locked':'')+'"';
+    html+=locked?' disabled':' data-action="open-lesson" data-lesson-id="'+l.id+'"';
+    html+='>';
+    html+='<div class="lesson-num-tile '+tileCls+'">'+(locked?icon('lock',14):isDone?icon('check',18):String(i+1))+'</div>';
+    html+='<div class="lesson-row-meta"><p class="lesson-row-title">'+esc(l.title)+'</p>';
+    html+='<p class="lesson-row-tag" style="color:'+typeColor+';">'+typeLabel+' &middot; ~'+l.minutes+' min</p></div>';
+    if(!locked) html+=icon('arrow-right',16,'#71717a');
+    html+='</button>';
+  });
+  html+='</div>';
+  return html;
+}
+
+
+function renderReading(lesson,cat){
+  var c=LESSON_CONTENT[lesson.id]||{sections:[],tip:''};
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+esc(cat.title)+'</button>';
+  html+='<div class="lesson-card">';
+  html+='<div class="lesson-card-header" style="background:'+cat.color+';">';
+  html+='<div class="lesson-icon-tile">'+icon(cat.iconKey,26,'#fff')+'</div>';
+  html+='<div><p class="lesson-card-eyebrow">'+esc(cat.title)+' &middot; ~'+lesson.minutes+' min</p>';
+  html+='<h2 class="lesson-card-title">'+esc(lesson.title)+'</h2></div></div>';
+  html+='<div class="lesson-card-body">';
+  c.sections.forEach(function(s){
+    html+='<div class="lesson-section"><h3>'+esc(s.h)+'</h3><p>'+esc(s.b)+'</p></div>';
+  });
+  if(c.customHtml) html+=c.customHtml;
+  if(c.tip){
+    html+='<div class="tip-box"><p class="tip-eyebrow">Operator note</p><p class="tip-body">'+esc(c.tip)+'</p></div>';
+  }
+  html+='<button class="complete-btn" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#fff')+'</button>';
+  html+='</div></div>';
+  return html;
+}
+
+
+
+function renderBuilder(key,lesson,cat){
+  var w=WIDGETS[key];
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+esc(cat.title)+'</button>';
+  html+='<div class="int-card"><div class="int-card-header" style="background:'+cat.color+';">'+
+    '<div class="lesson-icon-tile">'+icon(w.icon,26,'#fff')+'</div>'+
+    '<div><p class="lesson-card-eyebrow">'+esc(cat.title)+' &middot; ~'+lesson.minutes+' min</p><h2 class="lesson-card-title">'+esc(lesson.title)+'</h2></div></div>';
+  html+='<div class="int-card-body"><p style="font-size:13px;color:#a1a1aa;margin-bottom:18px;">'+esc(w.intro)+'</p>';
+  html+='<div class="mib-grid"><div class="mib-col"><h4>'+esc(w.formTitle||'Build it')+'</h4>';
+  w.fields.forEach(function(f){
+    var val=state[w.prefix+f.key];
+    html+='<div class="mib-field"><label class="mib-label">'+esc(f.label)+'</label>';
+    if(f.kind==='textarea'){
+      html+='<textarea class="mib-textarea" data-w="'+w.prefix+'" data-f="'+f.key+'" placeholder="'+esc(f.ph||'')+'">'+esc(val)+'</textarea>';
+    } else if(f.kind==='select'){
+      html+='<select class="mib-select" data-w="'+w.prefix+'" data-f="'+f.key+'">';
+      f.opts.forEach(function(o){ html+='<option value="'+esc(o)+'"'+(val===o?' selected':'')+'>'+esc(o)+'</option>'; });
+      html+='</select>';
+    } else {
+      html+='<input class="mib-input" type="text" data-w="'+w.prefix+'" data-f="'+f.key+'" placeholder="'+esc(f.ph||'')+'" value="'+esc(val)+'">';
+    }
+    html+='</div>';
+  });
+  html+='<button class="mib-check-btn" data-action="w-check" data-key="'+key+'">'+esc(w.checkLabel||'Check it')+'</button>';
+  if(state[w.prefix+'Checked']&&state[w.prefix+'Feedback']){
+    var fb=state[w.prefix+'Feedback'];var cls=fb.kind==='pass'?'ok':fb.kind==='warn'?'warn':'bad';
+    html+='<div class="mib-feedback '+cls+'"><strong>'+esc(fb.headline)+'</strong>';
+    if(fb.items&&fb.items.length){html+='<ul>';fb.items.forEach(function(it){html+='<li>'+esc(it)+'</li>';});html+='</ul>';}
+    html+='</div>';
+    if(fb.kind==='pass'){html+='<button class="complete-btn" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#fff')+'</button>';}
+  }
+  html+='</div>';
+  html+='<div class="mib-col"><h4>Live preview</h4><div id="mib-preview">'+buildPreviewInner(key)+'</div></div>';
+  html+='</div></div></div>';
+  return html;
+}
+function buildPreviewInner(key){
+  var w=WIDGETS[key];var p=w.prefix;
+  function g(k){return state[p+k];}
+  if(w.preview==='compose')return composePV(w,g);
+  if(w.preview==='week')return weekPV(w,g);
+  return invitePV(w,g);
+}
+function emptySpan(t){return '<span class="invite-empty">'+esc(t)+'</span>';}
+function invitePV(w,g){
+  var html='<div class="invite-preview"><div class="invite-preview-head">';
+  html+='<h5>'+esc(w.headTitle||'Preview')+'</h5>';
+  if(w.headSub)html+='<p>'+esc(typeof w.headSub==='function'?w.headSub(g):w.headSub)+'</p>';
+  html+='</div><div class="invite-preview-body">';
+  w.rows.forEach(function(r){
+    var v=g(r.key);
+    html+='<div class="invite-row"><div class="invite-row-key">'+esc(r.label)+'</div><div class="invite-row-val">'+(v?esc(v):emptySpan(r.empty||('Add '+r.label)))+'</div></div>';
+  });
+  html+='</div>';
+  if(w.table)html+=w.table(g);
+  html+='</div>';
+  return html;
+}
+function composePV(w,g){
+  var from=w.from,sig=w.sig;
+  if(w.brand){var b=w.brand(g('Company'));from=b.from;sig=b.sig;}
+  var body=g('Body'),subj=g('Subject'),to=g('To');
+  var html='<div class="compose"><div class="compose-bar">New Message</div>';
+  html+='<div class="compose-row"><div class="compose-key">From</div><div class="compose-val">'+esc(from)+'</div></div>';
+  html+='<div class="compose-row"><div class="compose-key">To</div><div class="compose-val">'+(to?esc(to):'<span class="compose-empty">recipient</span>')+'</div></div>';
+  html+='<div class="compose-row"><div class="compose-key">Subject</div><div class="compose-val">'+(subj?esc(subj):'<span class="compose-empty">(no subject)</span>')+'</div></div>';
+  html+='<div class="compose-body">'+(body?esc(body):'<span class="compose-empty">Write the message.</span>')+'</div>';
+  html+='<div class="compose-sig">'+sig+'</div></div>';
+  return html;
+}
+function weekPV(w,g){
+  var html='<div class="week-grid">';
+  w.days.forEach(function(d){
+    var v=g(d.key);
+    html+='<div class="week-day"><p class="week-day-name">'+esc(d.name)+'</p><p class="week-day-tag">Open hours</p><p class="week-day-body">'+(v?esc(v):'<span class="invite-empty">unassigned</span>')+'</p></div>';
+  });
+  html+='</div>';
+  return html;
+}
+function gridHtml(cells){
+  var html='<div class="week-grid">';
+  cells.forEach(function(c){
+    html+='<div class="week-day"><p class="week-day-name">'+esc(c.d)+'</p><p class="week-day-tag">'+esc(c.t||'')+'</p><p class="week-day-body">'+esc(c.b||'')+'</p></div>';
+  });
+  html+='</div>';
+  return html;
+}
+function renderQuiz(key,lesson,cat){
+  var w=WIDGETS[key];var p=w.prefix;var idx=state[p+'Idx'];var list=w.scenarios;var s=list[idx];
+  var picked=state[p+'Picked'][s.id];var revealed=state[p+'Revealed'][s.id];
+  var total=list.length;var allDone=list.every(function(x){return state[p+'Revealed'][x.id];});
+  var correctCount=list.filter(function(x){return state[p+'Picked'][x.id]===x.correct;}).length;
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+esc(cat.title)+'</button>';
+  html+='<div class="int-card"><div class="int-card-header" style="background:'+cat.color+';">'+
+    '<div class="lesson-icon-tile">'+icon(w.icon,26,'#fff')+'</div>'+
+    '<div><p class="lesson-card-eyebrow">'+esc(cat.title)+' &middot; ~'+lesson.minutes+' min</p><h2 class="lesson-card-title">'+esc(lesson.title)+'</h2></div></div>';
+  html+='<div class="int-card-body"><p style="font-size:13px;color:#a1a1aa;margin-bottom:16px;">'+esc(w.intro)+'</p>';
+  html+='<div class="drill-stage"><p class="drill-tag">'+esc(w.unit||'Item')+' '+(idx+1)+' of '+total+'</p>';
+  if(s.grid)html+=gridHtml(s.grid);
+  html+='<div class="drill-scenario">';
+  if(s.card){html+=s.card;}
+  else{
+    if(s.from)html+='<div class="drill-from">'+esc((s.fromLabel||'From')+': '+s.from)+'</div>';
+    if(s.subject)html+='<div class="drill-subject">'+esc(s.subject)+'</div>';
+    html+='<div class="drill-body">'+esc(s.body)+'</div>';
+  }
+  html+='</div>';
+  if(w.btn==='drill'){
+    html+='<div class="drill-btns">';
+    w.actions.forEach(function(a){
+      var cls='drill-btn';
+      if(revealed){if(a.id===s.correct)cls+=picked===a.id?' picked-correct':' correct-shown';else if(a.id===picked)cls+=' picked-wrong';}
+      html+='<button class="'+cls+'" data-action="q-pick" data-key="'+key+'" data-act="'+esc(a.id)+'"><span>'+esc(a.name)+'</span><small>'+esc(a.sub)+'</small></button>';
+    });
+    html+='</div>';
+  } else {
+    var acts=s.opts||w.actions;
+    html+='<div class="sim-buttons">';
+    acts.forEach(function(a){
+      var cls='sim-btn';
+      if(revealed){if(a===s.correct)cls+=picked===a?' picked-correct':' correct-shown';else if(a===picked)cls+=' picked-wrong';}
+      html+='<button class="'+cls+'" data-action="q-pick" data-key="'+key+'" data-act="'+esc(a)+'">'+esc(a)+'</button>';
+    });
+    html+='</div>';
+  }
+  if(revealed){
+    var ok=picked===s.correct;var label;
+    if(w.btn==='drill'){var ca=w.actions.filter(function(a){return a.id===s.correct;})[0];label=ca?ca.name:s.correct;}
+    else label=s.correct;
+    html+='<div class="feedback '+(ok?'ok':'bad')+'">'+(ok?'Correct. ':'Answer: '+esc(label)+'. ')+esc(s.why)+'</div>';
+    if(idx<total-1)html+='<div style="text-align:right;margin-top:12px;"><button class="next-btn" data-action="q-next" data-key="'+key+'">Next '+icon('arrow-right',14,'#fff')+'</button></div>';
+  }
+  html+='</div>';
+  if(allDone){
+    html+='<div class="score-line">'+icon('check',13,'#86efac')+' Score: '+correctCount+'/'+total+'</div>';
+    html+='<button class="complete-btn" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#fff')+'</button>';
+  }
+  html+='</div></div>';return html;
+}
+function renderLesson(lesson,cat){
+  if(lesson.type==='reading')return renderReading(lesson,cat);
+  var w=WIDGETS[lesson.intKey];
+  if(w&&w.family==='builder')return renderBuilder(lesson.intKey,lesson,cat);
+  if(w)return renderQuiz(lesson.intKey,lesson,cat);
+  return renderReading(lesson,cat);
+}
+function initWidget(key){
+  var w=WIDGETS[key];if(!w)return;
+  if(w.family==='builder'){
+    state[w.prefix+'Checked']=false;state[w.prefix+'Feedback']=null;
+    w.fields.forEach(function(f){state[w.prefix+f.key]=(f.def!=null?f.def:'');});
+  } else {
+    state[w.prefix+'Idx']=0;state[w.prefix+'Picked']={};state[w.prefix+'Revealed']={};
+  }
+}
+Object.keys(WIDGETS).forEach(initWidget);
+function render(){
+  var app=document.getElementById('app');var html='';
+  if(state.view==='home'){html=renderHome();}
+  else if(state.view.indexOf('category:')===0){var cat=getCat(state.view.slice(9));html=cat?renderCategory(cat):renderHome();}
+  else if(state.view.indexOf('lesson:')===0){var info=getLesson(state.view.slice(7));html=info?renderLesson(info.lesson,info.cat):renderHome();}
+  app.innerHTML=html;
+  if(state.view.indexOf('lesson:')===0){
+    var info2=getLesson(state.view.slice(7));
+    if(info2&&info2.lesson.intKey){
+      var w=WIDGETS[info2.lesson.intKey];
+      if(w&&w.family==='builder'){
+        var key=info2.lesson.intKey;
+        setTimeout(function(){
+          document.querySelectorAll('[data-w]').forEach(function(el){
+            el.addEventListener('input',function(e){
+              var pre=e.target.getAttribute('data-w');var fld=e.target.getAttribute('data-f');
+              state[pre+fld]=e.target.value;state[pre+'Checked']=false;state[pre+'Feedback']=null;
+              var pv=document.getElementById('mib-preview');if(pv)pv.innerHTML=buildPreviewInner(key);
+            });
+          });
+        },50);
+      }
+    }
+  }
+}
+document.body.addEventListener('click',function(ev){
+  var t=ev.target.closest('[data-action]');if(!t)return;
+  var action=t.getAttribute('data-action');
+  if(action==='open-cat'){state.view='category:'+t.getAttribute('data-cat-id');render();window.scrollTo({top:0,behavior:'smooth'});}
+  else if(action==='back-home'){state.view='home';render();window.scrollTo({top:0,behavior:'smooth'});}
+  else if(action==='back-cat'){state.view='category:'+t.getAttribute('data-cat-id');render();window.scrollTo({top:0,behavior:'smooth'});}
+  else if(action==='open-lesson'){var lid=t.getAttribute('data-lesson-id');var info=getLesson(lid);if(info&&info.lesson.intKey){initWidget(info.lesson.intKey);}state.view='lesson:'+lid;render();window.scrollTo({top:0,behavior:'smooth'});}
+  else if(action==='complete-lesson'){var lid2=t.getAttribute('data-lesson-id');state.completed[lid2]=true;if(window.DOVASaveProgress)window.DOVASaveProgress(lid2);var info2=getLesson(lid2);if(info2){var next=null;for(var i=0;i<info2.cat.lessons.length;i++){if(info2.cat.lessons[i].id===lid2&&i+1<info2.cat.lessons.length){next=info2.cat.lessons[i+1];break;}}state.view=next?'lesson:'+next.id:'category:'+info2.cat.id;render();window.scrollTo({top:0,behavior:'smooth'});}}
+  else if(action==='w-check'){var k1=t.getAttribute('data-key');var w1=WIDGETS[k1];state[w1.prefix+'Feedback']=w1.validate();state[w1.prefix+'Checked']=true;render();}
+  else if(action==='q-pick'){var k2=t.getAttribute('data-key');var w2=WIDGETS[k2];var sc=w2.scenarios[state[w2.prefix+'Idx']];if(state[w2.prefix+'Revealed'][sc.id])return;state[w2.prefix+'Picked'][sc.id]=t.getAttribute('data-act');state[w2.prefix+'Revealed'][sc.id]=true;render();}
+  else if(action==='q-next'){var k3=t.getAttribute('data-key');var w3=WIDGETS[k3];if(state[w3.prefix+'Idx']<w3.scenarios.length-1){state[w3.prefix+'Idx']++;render();}}
+});
+
+
+
+const SB=window.supabase.createClient(window.DOVA_CFG.url, window.DOVA_CFG.anon);
+window._sb=SB;
+window.DOVASaveProgress=async function(lid){ if(!window._uid)return;
+  try{ await SB.from('module_progress').upsert({user_id:window._uid,module_id:MODULE_ID,lesson_id:lid,completed:true},{onConflict:'user_id,module_id,lesson_id'}); }catch(e){console.warn('save',e);} };
+(async function(){
+  try{
+    const r=await SB.auth.getSession(); const session=r.data&&r.data.session;
+    if(!session){ location.replace('index.html'); return; }
+    window._uid=session.user.id;
+    try{ const q=await SB.from('module_progress').select('lesson_id').eq('user_id',session.user.id).eq('module_id',MODULE_ID).eq('completed',true);
+         (q.data||[]).forEach(function(row){ state.completed[row.lesson_id]=true; }); }catch(e){}
+  }catch(e){ console.warn('auth',e); }
+  Object.keys(WIDGETS).forEach(initWidget);
+  var ls=document.getElementById('logo-slot'); if(ls) ls.innerHTML=icon(LOGO_ICON,22,'#fff');
+  render();
+})();
+</script></body></html>

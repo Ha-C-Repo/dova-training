@@ -1,0 +1,66 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>DOVA Training · Sign in</title><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet"/><style>
+*,*::before,*::after{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{background:#060f1f;color:#E6EDF5;font-family:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.55;min-height:100vh;
+ background-image:radial-gradient(circle at 82% 6%,rgba(46,111,219,.16),transparent 42%),radial-gradient(circle at 12% 96%,rgba(31,78,156,.12),transparent 45%);}
+a{color:inherit;text-decoration:none;}p{margin:0;}h1,h2,h3,h4{margin:0;font-weight:700;}
+.container{max-width:1080px;margin:0 auto;padding:0 20px;}
+header.site{border-bottom:1px solid #1e3a5f;background:rgba(6,15,31,.85);position:sticky;top:0;z-index:10;backdrop-filter:blur(8px);}
+.header-row{max-width:1080px;margin:0 auto;padding:11px 20px;display:flex;align-items:center;gap:12px;}
+.logo-tile{width:40px;height:40px;background:#2E6FDB;display:flex;align-items:center;justify-content:center;flex-shrink:0;border-radius:3px;}
+.header-meta .small{font-family:'Roboto Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.3em;color:#6b8099;}
+.header-meta .big{font-family:'Inter',sans-serif;font-weight:800;font-size:17px;color:#fff;margin-top:2px;letter-spacing:.01em;}
+footer.site{max-width:1080px;margin:0 auto;padding:28px 20px;border-top:1px solid #16314f;text-align:center;}
+footer.site p{font-family:'Roboto Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.3em;color:#4a6076;}
+
+.auth-wrap{max-width:420px;margin:8vh auto 0;padding:0 20px;}
+.auth-card{background:#0B1F3D;border:1px solid #1e3a5f;border-radius:6px;padding:30px 26px;}
+.auth-logo{width:48px;height:48px;background:#2E6FDB;border-radius:4px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;}
+.auth-eyebrow{font-family:'Roboto Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.3em;color:#2E6FDB;margin-bottom:6px;}
+.auth-h1{font-family:'Inter',sans-serif;font-weight:800;font-size:30px;color:#fff;line-height:1;margin-bottom:6px;}
+.auth-sub{font-size:13px;color:#9FB3C8;margin-bottom:22px;}
+.fld{margin-bottom:14px;}
+.fld label{display:block;font-family:'Roboto Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#6b8099;margin-bottom:5px;}
+.fld input{width:100%;background:#060f1f;border:1px solid #1e3a5f;color:#E6EDF5;padding:11px 12px;font-size:14px;font-family:'DM Sans',sans-serif;border-radius:4px;}
+.fld input:focus{outline:none;border-color:#2E6FDB;}
+.auth-btn{width:100%;background:#2E6FDB;color:#fff;border:none;padding:12px;font-size:14px;font-weight:700;font-family:'Inter',sans-serif;cursor:pointer;border-radius:4px;letter-spacing:.02em;}
+.auth-btn:hover{background:#1f4e9c;}
+.auth-switch{margin-top:16px;text-align:center;font-size:12px;color:#9FB3C8;}
+.auth-switch a{color:#2E6FDB;cursor:pointer;}
+.auth-msg{margin-top:14px;font-size:12px;padding:9px 11px;border-radius:4px;display:none;}
+.auth-msg.err{display:block;background:rgba(220,80,80,.12);border:1px solid rgba(220,80,80,.4);color:#f0b4b4;}
+.auth-msg.ok{display:block;background:rgba(42,140,90,.14);border:1px solid rgba(42,140,90,.5);color:#9ad9b8;}
+.hide{display:none;}
+</style></head><body><div class="auth-wrap"><div class="auth-card"><div class="auth-logo"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-9"/><rect x="10" y="13" width="4" height="7"/></svg></div><div id="signinBox"><p class="auth-eyebrow">D.O.V.A., LLC · Internal</p><h1 class="auth-h1">Training Portal</h1><p class="auth-sub">Sign in to start your modules. Your progress is saved to your account.</p><div class="fld"><label>Email</label><input id="si-email" type="email" autocomplete="username"/></div><div class="fld"><label>Password</label><input id="si-pass" type="password" autocomplete="current-password"/></div><button class="auth-btn" id="si-btn">Sign in</button><p class="auth-switch">New here? <a id="toSignup">Create your account</a></p></div><div id="signupBox" class="hide"><p class="auth-eyebrow">D.O.V.A., LLC · Internal</p><h1 class="auth-h1">Create account</h1><p class="auth-sub">You need the access code from the office to register.</p><div class="fld"><label>Full name</label><input id="su-name" type="text" autocomplete="name"/></div><div class="fld"><label>Email</label><input id="su-email" type="email" autocomplete="email"/></div><div class="fld"><label>Password</label><input id="su-pass" type="password" autocomplete="new-password"/></div><div class="fld"><label>Access code</label><input id="su-code" type="text"/></div><button class="auth-btn" id="su-btn">Create account</button><p class="auth-switch">Already registered? <a id="toSignin">Sign in</a></p></div><div id="msg" class="auth-msg"></div></div></div><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="config.js"></script><script>"use strict";
+
+const SB=window.supabase.createClient(window.DOVA_CFG.url, window.DOVA_CFG.anon);
+const $=function(id){return document.getElementById(id);};
+function msg(t,kind){var m=$('msg');m.textContent=t;m.className='auth-msg '+kind;}
+SB.auth.getSession().then(function(r){ if(r.data&&r.data.session){ location.replace('suite.html'); } });
+$('toSignup').onclick=function(){$('signinBox').classList.add('hide');$('signupBox').classList.remove('hide');msg('','');};
+$('toSignin').onclick=function(){$('signupBox').classList.add('hide');$('signinBox').classList.remove('hide');msg('','');};
+$('si-btn').onclick=async function(){
+  var email=$('si-email').value.trim(), pass=$('si-pass').value;
+  if(!email||!pass){msg('Enter your email and password.','err');return;}
+  $('si-btn').disabled=true;
+  var r=await SB.auth.signInWithPassword({email:email,password:pass});
+  $('si-btn').disabled=false;
+  if(r.error){msg('Sign in failed. Check your email and password.','err');return;}
+  location.replace('suite.html');
+};
+$('su-btn').onclick=async function(){
+  var name=$('su-name').value.trim(), email=$('su-email').value.trim(), pass=$('su-pass').value, code=$('su-code').value.trim();
+  if(!name||!email||!pass||!code){msg('Fill in every field, including the access code.','err');return;}
+  if(pass.length<8){msg('Use a password of at least 8 characters.','err');return;}
+  $('su-btn').disabled=true;
+  var r=await SB.auth.signUp({email:email,password:pass,options:{data:{full_name:name,access_code:code}}});
+  $('su-btn').disabled=false;
+  if(r.error){
+    if(/code|saving new user/i.test(r.error.message)){msg('That access code did not match. Ask the office for the current code.','err');}
+    else{msg('Could not create the account. '+r.error.message,'err');}
+    return;
+  }
+  if(r.data&&r.data.session){ location.replace('suite.html'); }
+  else{ msg('Account created. Check your email to confirm, then sign in.','ok'); $('toSignin').click(); }
+};
+</script></body></html>
