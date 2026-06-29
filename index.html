@@ -33,34 +33,42 @@ footer.site p{font-family:'Roboto Mono',monospace;font-size:9px;text-transform:u
 .hide{display:none;}
 </style></head><body><div class="auth-wrap"><div class="auth-card"><div class="auth-logo"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-9"/><rect x="10" y="13" width="4" height="7"/></svg></div><div id="signinBox"><p class="auth-eyebrow">D.O.V.A., LLC · Internal</p><h1 class="auth-h1">Training Portal</h1><p class="auth-sub">Sign in to start your modules. Your progress is saved to your account.</p><div class="fld"><label>Email</label><input id="si-email" type="email" autocomplete="username"/></div><div class="fld"><label>Password</label><input id="si-pass" type="password" autocomplete="current-password"/></div><button class="auth-btn" id="si-btn">Sign in</button><p class="auth-switch">New here? <a id="toSignup">Create your account</a></p></div><div id="signupBox" class="hide"><p class="auth-eyebrow">D.O.V.A., LLC · Internal</p><h1 class="auth-h1">Create account</h1><p class="auth-sub">You need the access code from the office to register.</p><div class="fld"><label>Full name</label><input id="su-name" type="text" autocomplete="name"/></div><div class="fld"><label>Email</label><input id="su-email" type="email" autocomplete="email"/></div><div class="fld"><label>Password</label><input id="su-pass" type="password" autocomplete="new-password"/></div><div class="fld"><label>Access code</label><input id="su-code" type="text"/></div><button class="auth-btn" id="su-btn">Create account</button><p class="auth-switch">Already registered? <a id="toSignin">Sign in</a></p></div><div id="msg" class="auth-msg"></div></div></div><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="config.js"></script><script>"use strict";
 
-const SB=window.supabase.createClient(window.DOVA_CFG.url, window.DOVA_CFG.anon);
-const $=function(id){return document.getElementById(id);};
-function msg(t,kind){var m=$('msg');m.textContent=t;m.className='auth-msg '+kind;}
-SB.auth.getSession().then(function(r){ if(r.data&&r.data.session){ location.replace('suite.html'); } });
-$('toSignup').onclick=function(){$('signinBox').classList.add('hide');$('signupBox').classList.remove('hide');msg('','');};
-$('toSignin').onclick=function(){$('signupBox').classList.add('hide');$('signinBox').classList.remove('hide');msg('','');};
-$('si-btn').onclick=async function(){
-  var email=$('si-email').value.trim(), pass=$('si-pass').value;
-  if(!email||!pass){msg('Enter your email and password.','err');return;}
-  $('si-btn').disabled=true;
-  var r=await SB.auth.signInWithPassword({email:email,password:pass});
-  $('si-btn').disabled=false;
-  if(r.error){msg('Sign in failed. Check your email and password.','err');return;}
-  location.replace('suite.html');
-};
-$('su-btn').onclick=async function(){
-  var name=$('su-name').value.trim(), email=$('su-email').value.trim(), pass=$('su-pass').value, code=$('su-code').value.trim();
-  if(!name||!email||!pass||!code){msg('Fill in every field, including the access code.','err');return;}
-  if(pass.length<8){msg('Use a password of at least 8 characters.','err');return;}
-  $('su-btn').disabled=true;
-  var r=await SB.auth.signUp({email:email,password:pass,options:{data:{full_name:name,access_code:code}}});
-  $('su-btn').disabled=false;
-  if(r.error){
-    if(/code|saving new user/i.test(r.error.message)){msg('That access code did not match. Ask the office for the current code.','err');}
-    else{msg('Could not create the account. '+r.error.message,'err');}
-    return;
-  }
-  if(r.data&&r.data.session){ location.replace('suite.html'); }
-  else{ msg('Account created. Check your email to confirm, then sign in.','ok'); $('toSignin').click(); }
-};
+(function(){
+  var $=function(id){return document.getElementById(id);};
+  function msg(t,kind){var m=$('msg');if(m){m.textContent=t;m.className='auth-msg '+kind;}}
+  // UI toggles work regardless of whether the auth backend loaded
+  var su=$('toSignup'), si=$('toSignin');
+  if(su) su.onclick=function(){$('signinBox').classList.add('hide');$('signupBox').classList.remove('hide');msg('','');};
+  if(si) si.onclick=function(){$('signupBox').classList.add('hide');$('signinBox').classList.remove('hide');msg('','');};
+  var SB=null;
+  try{ if(window.supabase && window.DOVA_CFG){ SB=window.supabase.createClient(window.DOVA_CFG.url, window.DOVA_CFG.anon); } }catch(e){}
+  if(!SB){ msg('Sign-in service could not load. Check your connection, then refresh the page.','err'); }
+  else{ SB.auth.getSession().then(function(r){ if(r.data&&r.data.session){ location.replace('suite.html'); } }).catch(function(){}); }
+  $('si-btn').onclick=async function(){
+    if(!SB){ msg('Sign-in service not loaded. Refresh the page and try again.','err'); return; }
+    var email=$('si-email').value.trim(), pass=$('si-pass').value;
+    if(!email||!pass){msg('Enter your email and password.','err');return;}
+    $('si-btn').disabled=true;
+    var r; try{ r=await SB.auth.signInWithPassword({email:email,password:pass}); }catch(e){ r={error:{message:String(e)}}; }
+    $('si-btn').disabled=false;
+    if(r.error){msg('Sign in failed. Check your email and password.','err');return;}
+    location.replace('suite.html');
+  };
+  $('su-btn').onclick=async function(){
+    if(!SB){ msg('Sign-in service not loaded. Refresh the page and try again.','err'); return; }
+    var name=$('su-name').value.trim(), email=$('su-email').value.trim(), pass=$('su-pass').value, code=$('su-code').value.trim();
+    if(!name||!email||!pass||!code){msg('Fill in every field, including the access code.','err');return;}
+    if(pass.length<8){msg('Use a password of at least 8 characters.','err');return;}
+    $('su-btn').disabled=true;
+    var r; try{ r=await SB.auth.signUp({email:email,password:pass,options:{data:{full_name:name,access_code:code}}}); }catch(e){ r={error:{message:String(e)}}; }
+    $('su-btn').disabled=false;
+    if(r.error){
+      if(/code|saving new user/i.test(r.error.message)){msg('That access code did not match. Ask the office for the current code.','err');}
+      else{msg('Could not create the account. '+r.error.message,'err');}
+      return;
+    }
+    if(r.data&&r.data.session){ location.replace('suite.html'); }
+    else{ msg('Account created. You can sign in now.','ok'); $('toSignin').click(); }
+  };
+})();
 </script></body></html>

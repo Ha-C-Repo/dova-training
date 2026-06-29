@@ -532,12 +532,13 @@ document.body.addEventListener('click',function(ev){
 
 
 
-const SB=window.supabase.createClient(window.DOVA_CFG.url, window.DOVA_CFG.anon);
+var SB=null; try{ if(window.supabase && window.DOVA_CFG){ SB=window.supabase.createClient(window.DOVA_CFG.url, window.DOVA_CFG.anon); } }catch(e){ console.warn('sb init',e); }
 window._sb=SB;
-window.DOVASaveProgress=async function(lid){ if(!window._uid)return;
+window.DOVASaveProgress=async function(lid){ if(!window._uid||!SB)return;
   try{ await SB.from('module_progress').upsert({user_id:window._uid,module_id:MODULE_ID,lesson_id:lid,completed:true},{onConflict:'user_id,module_id,lesson_id'}); }catch(e){console.warn('save',e);} };
 (async function(){
   try{
+    if(!SB){ Object.keys(WIDGETS).forEach(initWidget); var ls0=document.getElementById('logo-slot'); if(ls0) ls0.innerHTML=icon(LOGO_ICON,22,'#fff'); render(); return; }
     const r=await SB.auth.getSession(); const session=r.data&&r.data.session;
     if(!session){ location.replace('index.html'); return; }
     window._uid=session.user.id;
